@@ -12,7 +12,10 @@ likelihood_sum_old = 0;
 likelihood_sum = 100;
 disp(['start ']);
 
-while (likelihood_sum-likelihood_sum_old) > 1 
+iter = 0;
+
+while (likelihood_sum-likelihood_sum_old) > 1
+    iter = iter + 1;
 %% Likelihood
     l_i = zeros(size(data, 1),1);
     h_ij = zeros(size(data, 1), c);

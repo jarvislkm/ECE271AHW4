@@ -4,7 +4,10 @@ clear all;
 load('TrainingSamplesDCT_8_new.mat');
 c = [1,2,4,8,16,32];
 dim = 64;
+repeat = 10;
+rate_rec = [];
 
+for num_of_repeat = 1:repeat
 %%
 scale = 0.0001;
 for i = 1:size(c,2)
@@ -53,9 +56,11 @@ for i = 1:size(c,2)
     rate_fg = error_fg/fg_num;
     rate_bg = error_bg/bg_num;
 end
-
+rate_rec = [rate_rec, rate];
+end
+%%
 figure
-plot(c, rate);
+semilogx(c, mean(rate'));
 title(['Error rate of different number of mixture models']);
 xlabel('number of mixture models');
 saveas(gcf,['number_of_mm.png']);
