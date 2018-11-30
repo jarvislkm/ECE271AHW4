@@ -58,10 +58,10 @@ for i = 1:5
             rate_fg = error_fg/fg_num;
             rate_bg = error_bg/bg_num;
         end
-%         figure
-%         plot(dim_eval, squeeze(rate(i,j,k)));
-%         title(['Error rate of set ' num2str(i) ' ' num2str(j)]);
-%         xlabel('Dimension of DCT used');
-%         saveas(gcf,['Set_' num2str(i) '_' num2str(j) '.png']);
+        figure
+        plot(dim_eval, squeeze(rate(i,j,:)));
+        title(['Error rate of set ' char(num2str(i)) ' ' char(num2str(j))]);
+        xlabel('Dimension of DCT used');
+        saveas(gcf,['Set_' num2str(i) '_' num2str(j) '.png']);
     end
 end
