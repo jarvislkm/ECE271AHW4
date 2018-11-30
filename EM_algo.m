@@ -12,7 +12,7 @@ likelihood_sum_old = 0;
 likelihood_sum = 100;
 disp(['start ']);
 
-while (likelihood_sum-likelihood_sum_old) > 1
+while (likelihood_sum-likelihood_sum_old) > 1 
 %% Likelihood
     l_i = zeros(size(data, 1),1);
     h_ij = zeros(size(data, 1), c);
@@ -23,11 +23,6 @@ while (likelihood_sum-likelihood_sum_old) > 1
         l_i = l_i + likelihood.* p_weight(j);
     end
     h_ij = (h_ij'./(sum(h_ij')))';
-    
-    if status == "eval"
-        likelihood_eval = l_i;
-        break;
-    end
     
     likelihood_sum_old = likelihood_sum;
     likelihood_sum = sum(log(l_i));

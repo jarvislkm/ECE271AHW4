@@ -28,10 +28,11 @@ p_fg = size(TrainsampleDCT_FG,1)/(size(TrainsampleDCT_FG,1)+size(TrainsampleDCT_
 p_bg = size(TrainsampleDCT_BG,1)/(size(TrainsampleDCT_FG,1)+size(TrainsampleDCT_BG,1));
 
 for k = 1:size(dim_eval,2)
+    disp(k);
     for i = 1:5
         for j = 1:5
-        likelihood_bg = EM_eval(test_data, p_BG{i}, dim_eval(k));
-        likelihood_fg = EM_eval(test_data, p_FG{j}, dim_eval(k));
+            likelihood_bg = EM_eval(test_data, p_BG{i}, dim_eval(k));
+            likelihood_fg = EM_eval(test_data, p_FG{j}, dim_eval(k));
 
         p_fg_x = likelihood_fg * p_fg;
         p_bg_x = likelihood_bg * p_bg;
@@ -57,10 +58,10 @@ for i = 1:5
             rate_fg = error_fg/fg_num;
             rate_bg = error_bg/bg_num;
         end
-        figure
-        plot(dim_eval, squeeze(rate(i,j,k)));
-        title(['Error rate of set ' num2str(i) ' ' num2str(j)]);
-        xlabel('Dimension of DCT used');
-        saveas(gcf,['Set_' num2str(i) '_' num2str(j) '.png']);
+%         figure
+%         plot(dim_eval, squeeze(rate(i,j,k)));
+%         title(['Error rate of set ' num2str(i) ' ' num2str(j)]);
+%         xlabel('Dimension of DCT used');
+%         saveas(gcf,['Set_' num2str(i) '_' num2str(j) '.png']);
     end
 end
