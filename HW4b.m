@@ -60,7 +60,7 @@ rate_rec = [rate_rec, rate];
 end
 %%
 figure
-semilogx(c, mean(rate'));
+semilogx(c, mean(rate_rec'));
 title(['Error rate of different number of mixture models']);
 xlabel('number of mixture models');
 saveas(gcf,['number_of_mm.png']);
