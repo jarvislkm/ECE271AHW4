@@ -1,4 +1,4 @@
-function [p, likelihood_eval] = EM_algo(data,p,status)
+function [p, likelihood_eval] = EM_algo(data,p)
 % EM algorithm using
 %   Detailed explanation goes here
 p_mu = p.mu;
@@ -10,7 +10,8 @@ dim = size(p_mu, 2);
 
 likelihood_sum_old = 0;
 likelihood_sum = 100;
-disp(['start ' status]);
+disp(['start ']);
+
 while (likelihood_sum-likelihood_sum_old) > 1
 %% Likelihood
     l_i = zeros(size(data, 1),1);
