@@ -46,6 +46,7 @@ end
 %% error
 rate = zeros(5,5,size(dim_eval,2));
 for i = 1:5
+    figure
     for j = 1:5
         for k = 1:size(dim_eval,2)
             diff = abs(squeeze(res(i,j,k,:,:))-im2double(gt));
@@ -58,10 +59,11 @@ for i = 1:5
             rate_fg = error_fg/fg_num;
             rate_bg = error_bg/bg_num;
         end
-        figure
-        plot(dim_eval, squeeze(rate(i,j,:)));
-        title(['Error rate of set ' char(num2str(i)) ' ' char(num2str(j))]);
-        xlabel('Dimension of DCT used');
-        saveas(gcf,['Set_' num2str(i) '_' num2str(j) '.png']);
+        plot(dim_eval, squeeze(rate(i,j,:))); hold on;
     end
+    legend('1', '2', '3', '4', '5');
+    title(['Error rate of set ' char(num2str(i)) ]);
+    xlabel('Dimension of features');
+    ylabel('Error rate');
+    saveas(gcf,['Set_' num2str(i) '.png']);
 end

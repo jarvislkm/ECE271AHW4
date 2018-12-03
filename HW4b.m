@@ -4,10 +4,8 @@ clear all;
 load('TrainingSamplesDCT_8_new.mat');
 c = [1,2,4,8,16,32];
 dim = 64;
-repeat = 1;
 rate_rec = [];
 
-for num_of_repeat = 1:repeat
 %%
 scale = 0.0001;
 for i = 1:size(c,2)
@@ -33,8 +31,8 @@ p_bg = size(TrainsampleDCT_BG,1)/(size(TrainsampleDCT_FG,1)+size(TrainsampleDCT_
 for k = 1:size(dim_eval,2)
     disp(k);
     for i = 1:size(c,2)
-        likelihood_bg = EM_eval(test_data, p_BG{i}, dim_eval);
-        likelihood_fg = EM_eval(test_data, p_FG{i}, dim_eval);
+        likelihood_bg = EM_eval(test_data, p_BG{i}, dim_eval(k));
+        likelihood_fg = EM_eval(test_data, p_FG{i}, dim_eval(k));
 
         p_fg_x = likelihood_fg * p_fg;
         p_bg_x = likelihood_bg * p_bg;
@@ -61,10 +59,11 @@ for i = 1:size(c,2)
     end
 end
 rate_rec = [rate_rec, rate];
-end
 %%
-% figure
-% semilogx(c, mean(rate_rec'));
-% title(['Error rate of different number of mixture models']);
-% xlabel('number of mixture models');
-% saveas(gcf,['number_of_mm.png']);
+figure
+plot(dim_eval', rate','LineWidth', 2);
+legend('1','2','4','8','16','32');
+title(['Error rate of different number of mixture models']);
+xlabel('Dimension of features');
+ylabel('Error rate');
+saveas(gcf,['number_of_mm.png']);
