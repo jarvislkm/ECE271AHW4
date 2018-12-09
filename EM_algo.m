@@ -25,7 +25,12 @@ while (likelihood_sum-likelihood_sum_old) > 1
         h_ij(:,j) = likelihood.* p_weight(j);
         l_i = l_i + likelihood.* p_weight(j);
     end
-    h_ij = (h_ij'./(sum(h_ij')))';
+    
+    if c==1
+        h_ij = ones(size(data,1),1);
+    else
+        h_ij = (h_ij'./(sum(h_ij')))';
+    end
     
     likelihood_sum_old = likelihood_sum;
     likelihood_sum = sum(log(l_i));
@@ -42,7 +47,7 @@ while (likelihood_sum-likelihood_sum_old) > 1
         for i = 1:size(data,1)
             tmp_var = tmp_var + h_ij(i,j)*eye(dim).*((data(i,:)-p_mu_next(j,:))'*(data(i,:)-p_mu_next(j,:)));
         end
-        p_var_next(j,:,:) = tmp_var/sum(h_ij(:,j)) + 1e-5*eye(dim);
+        p_var_next(j,:,:) = tmp_var/sum(h_ij(:,j))+1e-5*eye(size(tmp_var));
     end
 
     %% update

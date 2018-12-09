@@ -7,7 +7,7 @@ dim = 64;
 rate_rec = [];
 
 %%
-scale = 0.0001;
+scale = 0.001;
 for i = 1:size(c,2)
     p_FG_tmp = generate_rd_parameter(c(i),dim,scale);
     p_FG{i} = EM_algo(TrainsampleDCT_FG,p_FG_tmp);
@@ -61,7 +61,7 @@ end
 rate_rec = [rate_rec, rate];
 %%
 figure
-plot(dim_eval', rate','LineWidth', 2);
+semilogx(dim_eval', rate','LineWidth', 2);
 legend('1','2','4','8','16','32');
 title(['Error rate of different number of mixture models']);
 xlabel('Dimension of features');
